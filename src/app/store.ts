@@ -1,21 +1,43 @@
-import { configureStore } from "@reduxjs/toolkit";
+import {
+    configureStore,
+} from "@reduxjs/toolkit";
 
-import authReducer from "../features/auth/authSlice";
-import { baseApi } from "./baseApi";
+import {
+    baseApi,
+} from "./baseApi";
+
+import newsletterReducer from "../features/Newsletter/NewsletterSlice";
 
 
+export const store =
+    configureStore({
 
-export const store = configureStore({
-    reducer: {
-        auth: authReducer,
+        reducer: {
 
-        [baseApi.reducerPath]: baseApi.reducer,
-    },
+            [baseApi.reducerPath]:
+                baseApi.reducer,
 
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(baseApi.middleware),
-});
+            newsletter:
+                newsletterReducer,
+        },
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-export type AppStore = typeof store;
+        middleware: (
+            getDefaultMiddleware,
+        ) =>
+            getDefaultMiddleware().concat(
+                baseApi.middleware,
+            ),
+    });
+
+
+/* ─────────────────────────────────────
+   TYPES
+───────────────────────────────────── */
+
+export type RootState =
+    ReturnType<
+        typeof store.getState
+    >;
+
+export type AppDispatch =
+    typeof store.dispatch;

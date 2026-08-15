@@ -7,8 +7,7 @@ import { TeacherLayout } from "../layouts/TeacherLayout";
 import { Home } from "../pages/public/Home";
 
 
-import { Issues } from "../pages/public/Issues";
-import { IssueDetails } from "../pages/public/IssueDetails";
+
 import { Achievements } from "../pages/public/Achievement/Achievements";
 import { CreativeCorner } from "../pages/public/CreativeCorner";
 import { Contributors } from "../pages/public/Contributors";
@@ -26,6 +25,13 @@ import Articles from "../pages/public/Article/Articles";
 import AchievementDetails from "../pages/public/Achievement/AchievementDetails";
 import About from "../pages/public/About";
 import ArticleDetails from "../pages/public/Article/ArticleDetails";
+
+import { IssueDetails } from "../pages/IssueDetails";
+import { Issues } from "../pages/public/Issues";
+import { Issue } from "../pages/public/Issue";
+
+
+
 
 
 export const routes: RouteObject[] = [
@@ -53,7 +59,7 @@ export const routes: RouteObject[] = [
             },
             {
                 path: "issues/:issueId",
-                Component: IssueDetails,
+                Component: Issue,
             },
             {
                 path: "achievements",

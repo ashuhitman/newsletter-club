@@ -1,5 +1,5 @@
 import { AchievementsSection } from "../../components/achievement/AchievementsSection";
-import { ContributorsSection } from "../../components/newsletter/ContributorsSection";
+// import { ContributorsSection } from "../../components/newsletter/ContributorsSection";
 import { CreativeCornerSection } from "../../components/newsletter/CreativeCornerSection";
 
 import { LatestStories } from "../../components/article/LatestStories";
@@ -16,7 +16,7 @@ export function Home() {
             <AchievementsSection />
             <CreativeCornerSection />
             <PreviousIssues />
-            <ContributorsSection />
+            {/* <ContributorsSection /> */}
         </>
     );
 }
