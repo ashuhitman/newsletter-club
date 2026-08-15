@@ -1,8 +1,7 @@
 import {
     ArrowLeft,
     Award,
-    CalendarDays,
-    UserRound,
+
 } from "lucide-react";
 
 import {
@@ -10,11 +9,12 @@ import {
     useParams,
 } from "react-router";
 
-import { getImageUrl } from "../../../services/storageService";
+
 import {
     useGetAchievementQuery,
 } from "../../../features/achievements/achievementApi";
 import { NewsletterAchievementPage } from "../../../components/newsletter/NewsletterCard/NewsletterAchievementPage";
+import { NewsletterPage } from "../Issues/NewsletterPage";
 
 export default function AchievementDetails() {
     const { achievementId } = useParams();
@@ -128,8 +128,10 @@ export default function AchievementDetails() {
 
                 <article className="mt-5 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
 
+                    <NewsletterPage>
 
-                    <NewsletterAchievementPage achievement={achievement} />
+                        <NewsletterAchievementPage achievement={achievement} />
+                    </NewsletterPage>
 
                 </article>
 

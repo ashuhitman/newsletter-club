@@ -27,8 +27,8 @@ import About from "../pages/public/About";
 import ArticleDetails from "../pages/public/Article/ArticleDetails";
 
 import { IssueDetails } from "../pages/IssueDetails";
-import { Issues } from "../pages/public/Issues";
-import { Issue } from "../pages/public/Issue";
+import { Issues } from "../pages/public/Issues/Issues";
+import { Issue } from "../pages/public/Issues/Issue";
 
 
 

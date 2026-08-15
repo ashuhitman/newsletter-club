@@ -2,6 +2,10 @@ import type { Achievement } from "../../../features/achievements/achievementApi"
 import type { Article } from "../../../features/article/articleApi";
 
 
+/* ─────────────────────────────────────
+   NEWSLETTER ISSUE
+───────────────────────────────────── */
+
 export interface NewsletterIssue {
     id: string;
 
@@ -14,4 +18,9 @@ export interface NewsletterIssue {
     articles: Article[];
 
     achievements: Achievement[];
+
+    /*
+     * Gallery image file IDs
+     */
+    gallery: string[];
 }

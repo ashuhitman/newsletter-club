@@ -2,11 +2,17 @@
    NEWSLETTER ISSUE
 ───────────────────────────────────── */
 
-import type { NewsletterIssue } from "../components/newsletter/NewsletterCard/newsletterTypes";
-import type { Achievement } from "../features/achievements/achievementApi";
-import type { Article } from "../features/article/articleApi";
+import type {
+    NewsletterIssue,
+} from "../components/newsletter/NewsletterCard/newsletterTypes";
 
+import type {
+    Achievement,
+} from "../features/achievements/achievementApi";
 
+import type {
+    Article,
+} from "../features/article/articleApi";
 
 
 /* ─────────────────────────────────────
@@ -16,15 +22,57 @@ import type { Article } from "../features/article/articleApi";
 export function createNewsletterIssues(
     articles: Article[] = [],
     achievements: Achievement[] = [],
+    gallery: string[] = [],
 ): NewsletterIssue[] {
 
     const issueMap =
         new Map<string, NewsletterIssue>();
 
 
-    /* ─────────────────────────────
+    /* ═══════════════════════════════
+       HELPER
+    ═══════════════════════════════ */
+
+    function getOrCreateIssue(
+        year: number,
+        month: number,
+    ): NewsletterIssue {
+
+        const key =
+            `${year}-${month}`;
+
+
+        if (!issueMap.has(key)) {
+
+            issueMap.set(
+                key,
+                {
+                    id: "",
+
+                    year,
+
+                    month,
+
+                    issueNumber: 0,
+
+                    articles: [],
+
+                    achievements: [],
+
+                    gallery: [],
+                },
+            );
+
+        }
+
+
+        return issueMap.get(key)!;
+    }
+
+
+    /* ═══════════════════════════════
        ARTICLES
-    ───────────────────────────── */
+    ═══════════════════════════════ */
 
     for (const article of articles) {
 
@@ -73,47 +121,22 @@ export function createNewsletterIssues(
             date.getMonth() + 1;
 
 
-        const key =
-            `${year}-${month}`;
-
-
-        if (!issueMap.has(key)) {
-
-            issueMap.set(
-                key,
-                {
-                    /*
-                     * Temporary ID.
-                     *
-                     * It will be replaced
-                     * after sorting content.
-                     */
-                    id: "",
-
-                    year,
-
-                    month,
-
-                    issueNumber: 0,
-
-                    articles: [],
-
-                    achievements: [],
-                },
+        const issue =
+            getOrCreateIssue(
+                year,
+                month,
             );
-        }
 
 
-        issueMap
-            .get(key)!
-            .articles
-            .push(article);
+        issue.articles.push(
+            article,
+        );
     }
 
 
-    /* ─────────────────────────────
+    /* ═══════════════════════════════
        ACHIEVEMENTS
-    ───────────────────────────── */
+    ═══════════════════════════════ */
 
     for (
         const achievement
@@ -167,43 +190,22 @@ export function createNewsletterIssues(
             date.getMonth() + 1;
 
 
-        const key =
-            `${year}-${month}`;
-
-
-        if (!issueMap.has(key)) {
-
-            issueMap.set(
-                key,
-                {
-                    id: "",
-
-                    year,
-
-                    month,
-
-                    issueNumber: 0,
-
-                    articles: [],
-
-                    achievements: [],
-                },
+        const issue =
+            getOrCreateIssue(
+                year,
+                month,
             );
-        }
 
 
-        issueMap
-            .get(key)!
-            .achievements
-            .push(
-                achievement,
-            );
+        issue.achievements.push(
+            achievement,
+        );
     }
 
 
-    /* ─────────────────────────────
-       SORT LATEST MONTH FIRST
-    ───────────────────────────── */
+    /* ═══════════════════════════════
+       SORT LATEST ISSUE FIRST
+    ═══════════════════════════════ */
 
     const issues =
         Array.from(
@@ -232,19 +234,22 @@ export function createNewsletterIssues(
         );
 
 
-    /* ─────────────────────────────
+    /* ═══════════════════════════════
        ISSUE NUMBER
        
        Latest = highest number
        Older = lower number
-    ───────────────────────────── */
+    ═══════════════════════════════ */
 
     const totalIssues =
         issues.length;
 
 
     issues.forEach(
-        (issue, index) => {
+        (
+            issue,
+            index,
+        ) => {
 
             issue.issueNumber =
                 totalIssues - index;
@@ -253,15 +258,15 @@ export function createNewsletterIssues(
     );
 
 
-    /* ─────────────────────────────
-       SORT CONTENT INSIDE ISSUE
-    ───────────────────────────── */
+    /* ═══════════════════════════════
+       SORT CONTENT
+    ═══════════════════════════════ */
 
     for (const issue of issues) {
 
-        /*
-         * Latest articles first.
-         */
+        /* ─────────────────────────
+           ARTICLES
+        ───────────────────────── */
 
         issue.articles.sort(
             (a, b) => {
@@ -283,9 +288,9 @@ export function createNewsletterIssues(
         );
 
 
-        /*
-         * Latest achievements first.
-         */
+        /* ─────────────────────────
+           ACHIEVEMENTS
+        ───────────────────────── */
 
         issue.achievements.sort(
             (a, b) => {
@@ -307,19 +312,38 @@ export function createNewsletterIssues(
         );
 
 
-        /* ─────────────────────────
-           CREATE ISSUE ID
+        /* ═════════════════════════
+           ISSUE ID
            
            Article ID has priority.
            
            If there are no articles,
-           use first achievement ID.
-        ───────────────────────── */
+           achievement ID is used.
+        ═════════════════════════ */
 
         issue.id =
             issue.articles[0]?.$id ??
             issue.achievements[0]?.$id ??
             `${issue.year}-${issue.month}`;
+    }
+
+
+    /* ═══════════════════════════════
+       ADD GALLERY
+       
+       Gallery is simply string[].
+       
+       Since gallery images don't have
+       dates, attach them to the
+       generated issues here.
+    ═══════════════════════════════ */
+
+    if (issues.length > 0) {
+
+        issues[0].gallery = [
+            ...gallery,
+        ];
+
     }
 
 

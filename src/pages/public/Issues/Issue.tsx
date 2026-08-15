@@ -11,12 +11,15 @@ import {
 import {
     useSelector,
 } from "react-redux";
-import { selectNewsletterIssues } from "../../features/Newsletter/newsletterSelectors";
-import { NewsletterCoverPage } from "../../components/newsletter/NewsletterCard/NewsletterCoverPage";
-import { NewsletterContentsPage } from "../../components/newsletter/NewsletterCard/NewsletterContentPage";
-import { NewsletterArticlePage } from "../../components/newsletter/NewsletterCard/NewsletterArticlePage";
-import { NewsletterAchievementPage } from "../../components/newsletter/NewsletterCard/NewsletterAchievementPage";
-import { NewsletterEndPage } from "../../components/newsletter/NewsletterCard/NewsletterEndPage";
+import { selectNewsletterIssues } from "../../../features/Newsletter/newsletterSelectors";
+import { NewsletterCoverPage } from "../../../components/newsletter/NewsletterCard/NewsletterCoverPage";
+import { NewsletterContentsPage } from "../../../components/newsletter/NewsletterCard/NewsletterContentPage";
+import { NewsletterArticlePage } from "../../../components/newsletter/NewsletterCard/NewsletterArticlePage";
+import { NewsletterAchievementPage } from "../../../components/newsletter/NewsletterCard/NewsletterAchievementPage";
+import { NewsletterEndPage } from "../../../components/newsletter/NewsletterCard/NewsletterEndPage";
+import { getMonthName } from "../../../utils/utils";
+import { NewsletterPage } from "./NewsletterPage";
+import { NewsletterGalleryPage } from "../../../components/newsletter/NewsletterCard/NewsletterGallary";
 
 
 
@@ -296,6 +299,7 @@ export function Issue() {
                                 text-blue-950
                             "
                         >
+
                             {getMonthName(
                                 issue.month,
                             )}{" "}
@@ -445,7 +449,11 @@ export function Issue() {
                         ),
                     )}
 
+                    {/* ═════════════════
+                        Gallary
+                    ═════════════════ */}
 
+                    {/* <NewsletterGalleryPage images={issue.gallery} /> */}
                     {/* ═════════════════
                         END PAGE
                     ═════════════════ */}
@@ -469,55 +477,10 @@ export function Issue() {
 }
 
 
-/* ─────────────────────────────────────
-   NEWSLETTER PAGE WRAPPER
-───────────────────────────────────── */
-
-interface NewsletterPageProps {
-    children: React.ReactNode;
-}
 
 
-function NewsletterPage({
-    children,
-}: NewsletterPageProps) {
-
-    return (
-        <section
-            className="
-                relative
-                aspect-[2/3]
-                w-full
-                overflow-hidden
-                rounded-lg
-                bg-white
-                shadow-[0_15px_40px_rgba(15,23,42,0.15)]
-            "
-        >
-            {children}
-        </section>
-    );
-}
 
 
 /* ─────────────────────────────────────
    MONTH NAME
 ───────────────────────────────────── */
-
-function getMonthName(
-    month: number,
-): string {
-
-    return new Intl.DateTimeFormat(
-        "en-IN",
-        {
-            month: "long",
-        },
-    ).format(
-        new Date(
-            2026,
-            month - 1,
-            1,
-        ),
-    );
-}

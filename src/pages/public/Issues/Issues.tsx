@@ -5,8 +5,8 @@ import {
 import {
     useSelector,
 } from "react-redux";
-import { selectNewsletterIssues } from "../../features/Newsletter/newsletterSelectors";
-import { NewsletterCard } from "../../components/newsletter/NewsletterCard/NewsletterCard";
+import { selectNewsletterIssues } from "../../../features/Newsletter/newsletterSelectors";
+import { NewsletterCard } from "../../../components/newsletter/NewsletterCard/NewsletterCard";
 
 
 

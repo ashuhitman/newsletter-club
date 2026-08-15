@@ -13,6 +13,7 @@ import {
 import { getImageUrl } from "../../../services/storageService";
 import { useGetArticleQuery } from "../../../features/article/articleApi";
 import { NewsletterArticlePage } from "../../../components/newsletter/NewsletterCard/NewsletterArticlePage";
+import { NewsletterPage } from "../Issues/NewsletterPage";
 
 
 export default function ArticleDetails() {
@@ -148,7 +149,10 @@ export default function ArticleDetails() {
                     {/* ─────────────────
                         COVER IMAGE
                     ───────────────── */}
-                    <NewsletterArticlePage article={article} />
+                    <NewsletterPage>
+                        <NewsletterArticlePage article={article} />
+                    </NewsletterPage>
+
 
                 </article>
 
