@@ -22,9 +22,10 @@ import { EditNewsletter } from "../pages/teacher/EditNewsletter";
 import { TeacherLogin } from "../pages/auth/TeacherLogin";
 
 import Articles from "../pages/public/Article/Articles";
-import ArticleDetails from "../pages/public/Achievement/AchievementDetails";
+
 import AchievementDetails from "../pages/public/Achievement/AchievementDetails";
 import About from "../pages/public/About";
+import ArticleDetails from "../pages/public/Article/ArticleDetails";
 
 
 export const routes: RouteObject[] = [

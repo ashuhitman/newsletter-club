@@ -1,33 +1,33 @@
 import {
     ArrowLeft,
+    Award,
     CalendarDays,
-    Newspaper,
+    UserRound,
 } from "lucide-react";
 
 import {
     Link,
     useParams,
 } from "react-router";
-import { useGetArticleQuery } from "../../../features/article/articleApi";
+
 import { getImageUrl } from "../../../services/storageService";
+import {
+    useGetAchievementQuery,
+} from "../../../features/achievements/achievementApi";
 
-
-
-
-export default function ArticleDetails() {
-    const { articleId } = useParams();
+export default function AchievementDetails() {
+    const { achievementId } = useParams();
 
     const {
-        data: article,
+        data: achievement,
         isLoading,
         isError,
-    } = useGetArticleQuery(
-        articleId ?? "",
+    } = useGetAchievementQuery(
+        achievementId ?? "",
         {
-            skip: !articleId,
+            skip: !achievementId,
         },
     );
-
 
     /* ─────────────────────────────
        LOADING
@@ -36,74 +36,63 @@ export default function ArticleDetails() {
     if (isLoading) {
         return (
             <main className="min-h-screen bg-slate-50">
-                <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+                <div className="mx-auto max-w-4xl px-4 py-7 sm:px-6 lg:px-8">
 
-                    {/* Back */}
+                    <div className="h-4 w-32 animate-pulse rounded bg-slate-200" />
 
-                    <div className="h-5 w-32 animate-pulse rounded bg-slate-200" />
-
-
-                    {/* Article */}
-
-                    <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white">
+                    <div className="mt-5 overflow-hidden rounded-xl border border-slate-200 bg-white">
 
                         <div className="aspect-[16/9] animate-pulse bg-slate-200" />
 
-                        <div className="space-y-4 p-6 sm:p-8 lg:p-10">
+                        <div className="space-y-4 p-5 sm:p-7">
 
-                            <div className="h-5 w-28 animate-pulse rounded bg-slate-200" />
+                            <div className="h-4 w-28 animate-pulse rounded bg-slate-200" />
 
-                            <div className="h-9 w-4/5 animate-pulse rounded bg-slate-200" />
+                            <div className="h-7 w-3/4 animate-pulse rounded bg-slate-200" />
 
-                            <div className="h-4 w-48 animate-pulse rounded bg-slate-100" />
+                            <div className="h-4 w-40 animate-pulse rounded bg-slate-100" />
 
-                            <div className="space-y-2 pt-4">
-                                <div className="h-4 w-full animate-pulse rounded bg-slate-100" />
-                                <div className="h-4 w-full animate-pulse rounded bg-slate-100" />
-                                <div className="h-4 w-5/6 animate-pulse rounded bg-slate-100" />
-                            </div>
+                            <div className="h-20 animate-pulse rounded-lg bg-slate-100" />
 
                         </div>
 
                     </div>
-
                 </div>
             </main>
         );
     }
 
-
     /* ─────────────────────────────
        ERROR / NOT FOUND
     ───────────────────────────── */
 
-    if (isError || !article) {
+    if (isError || !achievement) {
         return (
             <main className="min-h-screen bg-slate-50">
 
-                <div className="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6 lg:px-8">
+                <div className="mx-auto max-w-3xl px-4 py-14 text-center sm:px-6 lg:px-8">
 
-                    <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-white text-slate-300 shadow-sm ring-1 ring-slate-200">
-                        <Newspaper className="size-7" />
+                    <div className="mx-auto flex size-12 items-center justify-center rounded-xl bg-white text-slate-300 shadow-sm ring-1 ring-slate-200">
+                        <Award className="size-6" />
                     </div>
 
-                    <h1 className="mt-5 text-xl font-bold tracking-tight text-slate-900">
-                        Article not found
+                    <h1 className="mt-4 text-lg font-bold text-slate-900">
+                        Achievement not found
                     </h1>
 
-                    <p className="mt-2 text-sm leading-6 text-slate-500">
-                        The article you're looking for could not be found.
+                    <p className="mt-2 text-sm text-slate-500">
+                        The achievement you're looking for could not be found.
                     </p>
 
                     <Link
-                        to="/articles"
-                        className="mt-6 inline-flex cursor-pointer items-center gap-2 text-sm font-semibold text-blue-950 transition-colors hover:text-blue-700"
+                        to="/achievements"
+                        className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-blue-950 hover:text-blue-700"
                     >
-                        <span className="flex size-8 items-center justify-center rounded-lg border border-slate-200 bg-white transition-colors hover:bg-slate-100">
-                            <ArrowLeft className="size-4" />
+                        <span className="flex size-7 items-center justify-center rounded-lg border border-slate-200 bg-white">
+                            <ArrowLeft className="size-3.5" />
                         </span>
 
-                        All stories
+                        All achievements
                     </Link>
 
                 </div>
@@ -112,141 +101,211 @@ export default function ArticleDetails() {
         );
     }
 
-
     /* ─────────────────────────────
-       ARTICLE
+       ACHIEVEMENT DETAILS
     ───────────────────────────── */
 
     return (
         <main className="min-h-screen bg-slate-50">
 
-            <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
+            <div className="mx-auto max-w-4xl px-4 py-7 sm:px-6 sm:py-9 lg:px-8">
 
-                {/* ─────────────────────
-                    BACK
-                ───────────────────── */}
+                {/* BACK */}
 
                 <Link
-                    to="/articles"
-                    className="group inline-flex cursor-pointer items-center gap-2 text-sm font-semibold text-slate-500 transition-colors hover:text-slate-950"
+                    to="/achievements"
+                    className="group inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-950"
                 >
-                    <span className="flex size-8 items-center justify-center rounded-lg border border-slate-200 bg-white transition-colors group-hover:border-slate-300 group-hover:bg-slate-100">
-                        <ArrowLeft className="size-4" />
+                    <span className="flex size-7 items-center justify-center rounded-lg border border-slate-200 bg-white group-hover:bg-slate-100">
+                        <ArrowLeft className="size-3.5" />
                     </span>
 
-                    All stories
+                    All achievements
                 </Link>
 
+                {/* CARD */}
 
-                {/* ─────────────────────
-                    ARTICLE CARD
-                ───────────────────── */}
+                <article className="mt-5 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
 
-                <article className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                    {/* IMAGE */}
 
-                    {/* ─────────────────
-                        COVER IMAGE
-                    ───────────────── */}
-
-                    {article.coverFileId ? (
-                        <div className="relative aspect-[16/9] overflow-hidden bg-slate-100 sm:aspect-[16/8]">
+                    {achievement.imageFileId ? (
+                        <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
 
                             <img
                                 src={getImageUrl(
-                                    article.coverFileId,
+                                    achievement.imageFileId,
                                 )}
-                                alt={article.title}
+                                alt={achievement.title}
                                 className="h-full w-full object-cover"
                             />
 
-                            {/* Category */}
-
-                            <div className="absolute right-0 top-5">
-                                <div className="rounded-l-md bg-amber-400 px-4 py-2 text-xs font-bold uppercase tracking-wider text-blue-950 shadow-sm">
-                                    {article.category}
+                            <div className="absolute right-0 top-4">
+                                <div className="rounded-l-md bg-amber-400 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-blue-950">
+                                    {achievement.category}
                                 </div>
                             </div>
 
                         </div>
                     ) : (
-                        <div className="relative flex aspect-[16/9] items-center justify-center bg-slate-100 sm:aspect-[16/8]">
+                        <div className="relative flex aspect-[16/9] items-center justify-center bg-slate-100">
 
-                            <Newspaper className="size-12 text-slate-300" />
+                            <Award className="size-12 text-slate-300" />
 
-                            <div className="absolute right-0 top-5">
-                                <div className="rounded-l-md bg-amber-400 px-4 py-2 text-xs font-bold uppercase tracking-wider text-blue-950 shadow-sm">
-                                    {article.category}
+                            <div className="absolute right-0 top-4">
+                                <div className="rounded-l-md bg-amber-400 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-blue-950">
+                                    {achievement.category}
                                 </div>
                             </div>
 
                         </div>
                     )}
 
+                    {/* CONTENT */}
 
-                    {/* ─────────────────
-                        ARTICLE CONTENT
-                    ───────────────── */}
+                    <div className="p-5 sm:p-7">
 
-                    <div className="p-6 sm:p-8 lg:p-10">
+                        {/* ACHIEVEMENT DATE + STATUS */}
 
-                        {/* Date */}
+                        <div className="flex flex-wrap items-center gap-2.5">
 
-                        {article.publishedAt && (
-                            <div className="flex items-center gap-2 text-sm text-slate-500">
+                            {achievement.achievementDate && (
+                                <div className="flex items-center gap-1.5 text-xs text-slate-500">
 
-                                <CalendarDays className="size-4" />
+                                    <CalendarDays className="size-3.5" />
 
-                                <time>
-                                    {formatDate(
-                                        article.publishedAt,
-                                    )}
-                                </time>
+                                    <time
+                                        dateTime={
+                                            achievement.achievementDate
+                                        }
+                                    >
+                                        Achievement Date:{" "}
+                                        {formatDate(
+                                            achievement.achievementDate,
+                                        )}
+                                    </time>
 
-                            </div>
-                        )}
+                                </div>
+                            )}
 
+                            {achievement.status && (
+                                <>
+                                    <span className="text-slate-300">
+                                        •
+                                    </span>
 
-                        {/* Title */}
-
-                        <h1 className="mt-4 text-2xl font-black tracking-tight text-slate-950 sm:text-3xl lg:text-4xl">
-                            {article.title}
-                        </h1>
-
-
-                        {/* Author */}
-
-                        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
-
-                            <span className="text-sm font-semibold text-amber-600">
-                                {article.authorName}
-                            </span>
-
-                            <span className="text-slate-300">
-                                •
-                            </span>
-
-                            <span className="text-sm text-slate-500">
-                                {article.authorType}
-                            </span>
+                                    <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold capitalize text-emerald-700">
+                                        {achievement.status}
+                                    </span>
+                                </>
+                            )}
 
                         </div>
 
+                        {/* TITLE */}
 
-                        {/* Excerpt */}
+                        <h1 className="mt-3 text-xl font-bold tracking-tight text-slate-950 sm:text-2xl">
+                            {achievement.title}
+                        </h1>
 
-                        {article.excerpt && (
-                            <p className="mt-6 border-b border-slate-100 pb-6 text-base font-medium leading-7 text-slate-600 sm:text-lg">
-                                {article.excerpt}
-                            </p>
-                        )}
+                        {/* NAME */}
 
+                        <div className="mt-4 flex items-center gap-2.5">
 
-                        {/* Content */}
+                            <div className="flex size-8 items-center justify-center rounded-lg bg-blue-50 text-blue-950">
+                                <UserRound className="size-4" />
+                            </div>
 
-                        <div className="mt-7">
+                            <div>
 
-                            <div className="whitespace-pre-line text-sm leading-7 text-slate-700 sm:text-base sm:leading-8">
-                                {article.content}
+                                <p className="text-[10px] font-medium uppercase tracking-wider text-slate-400">
+                                    Name
+                                </p>
+
+                                <p className="text-sm font-semibold text-slate-900">
+                                    {achievement.studentName}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        {/* ACHIEVEMENT */}
+
+                        <div className="mt-5 rounded-lg border border-amber-100 bg-amber-50/60 p-4">
+
+                            <div className="flex items-start gap-2.5">
+
+                                <Award className="mt-0.5 size-4 shrink-0 text-amber-600" />
+
+                                <div>
+
+                                    <p className="text-[10px] font-bold uppercase tracking-wider text-amber-700">
+                                        Achievement
+                                    </p>
+
+                                    <p className="mt-1 text-sm font-medium leading-6 text-slate-800">
+                                        {achievement.achievement}
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        {/* DESCRIPTION */}
+
+                        <div className="mt-6 border-t border-slate-100 pt-6">
+
+                            <h2 className="text-base font-bold text-slate-900">
+                                About the Achievement
+                            </h2>
+
+                            {achievement.description ? (
+                                <div className="mt-3 whitespace-pre-line text-sm leading-6 text-slate-600">
+                                    {achievement.description}
+                                </div>
+                            ) : (
+                                <p className="mt-3 text-sm italic text-slate-400">
+                                    No additional description available.
+                                </p>
+                            )}
+
+                        </div>
+
+                        {/* BOTTOM METADATA */}
+
+                        <div className="mt-7 border-t border-slate-100 pt-5">
+
+                            <div className="flex flex-col gap-3 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+
+                                {/* PUBLISHED ON */}
+
+                                <div className="flex items-center gap-2">
+
+                                    <CalendarDays className="size-3.5 text-slate-400" />
+
+                                    <span>
+                                        Published on{" "}
+                                        <span className="font-medium text-slate-700">
+                                            {formatDate(
+                                                achievement.$createdAt,
+                                            )}
+                                        </span>
+                                    </span>
+
+                                </div>
+
+                                {/* PUBLISHED BY */}
+
+                                <div>
+                                    Published by{" "}
+                                    <span className="font-semibold text-slate-700">
+                                        {achievement.createdBy}
+                                    </span>
+                                </div>
+
                             </div>
 
                         </div>
@@ -260,7 +319,6 @@ export default function ArticleDetails() {
         </main>
     );
 }
-
 
 /* ─────────────────────────────
    DATE FORMAT

@@ -7,7 +7,7 @@ const navigation = [
     { label: "Articles", to: "/articles" },
     { label: "Issues", to: "/issues" },
     { label: "Achievements", to: "/achievements" },
-    { label: "Creative Corner", to: "/creative-corner" },
+    // { label: "Creative Corner", to: "/creative-corner" },
     { label: "About", to: "/about" },
 ];
 
