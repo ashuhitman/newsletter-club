@@ -453,8 +453,8 @@ export function Issue() {
                     <NewsletterPage>
 
                         <NewsletterEndPage
-                            issue={
-                                issue
+                            issueNumber={
+                                issue.issueNumber
                             }
                         />
 
