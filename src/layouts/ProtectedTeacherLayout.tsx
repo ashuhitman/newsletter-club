@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router";
 
-import { useAppSelector } from "../app/hooks";
+
 
 export function ProtectedTeacherLayout() {
     // const {

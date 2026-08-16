@@ -14,10 +14,7 @@ import { Contributors } from "../pages/public/Contributors";
 
 
 
-import { TeacherDashboard } from "../pages/teacher/TeacherDashboard";
-import { Newsletters } from "../pages/teacher/Newsletters";
-import { CreateNewsletter } from "../pages/teacher/CreateNewsletter";
-import { EditNewsletter } from "../pages/teacher/EditNewsletter";
+
 import { TeacherLogin } from "../pages/auth/TeacherLogin";
 
 import Articles from "../pages/public/Article/Articles";
