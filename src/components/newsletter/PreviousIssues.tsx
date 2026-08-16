@@ -38,7 +38,7 @@ export function PreviousIssues() {
     ───────────────────────────── */
 
     const previousIssues =
-        issues.slice(0, 3);
+        issues.slice(1, 4);
 
 
     /* ─────────────────────────────

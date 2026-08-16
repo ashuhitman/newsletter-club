@@ -5,7 +5,7 @@ import { Menu, X } from "lucide-react";
 const navigation = [
     { label: "Home", to: "/" },
     { label: "Articles", to: "/articles" },
-    { label: "Issues", to: "/issues" },
+    { label: "Newsletter", to: "/issues" },
     { label: "Achievements", to: "/achievements" },
     // { label: "Creative Corner", to: "/creative-corner" },
     { label: "About", to: "/about" },

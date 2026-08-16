@@ -1,7 +1,17 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router";
+import { NewsletterCard } from "./NewsletterCard/NewsletterCard";
+import { selectNewsletterIssues } from "../../features/Newsletter/newsletterSelectors";
+import { useSelector } from "react-redux";
 
 export function NewsletterHero() {
+    const newsleeterIssues = useSelector(
+        selectNewsletterIssues,
+    );
+
+    console.log("newsletterheros", newsleeterIssues);
+
+
     return (
         <section className="overflow-hidden border-b border-slate-200 bg-white">
             <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
@@ -52,50 +62,8 @@ export function NewsletterHero() {
 
                     {/* Issue Cover */}
                     <div className="relative mx-auto w-full max-w-md lg:mx-0 lg:ml-auto">
-                        {/* Decorative background */}
-                        <div className="absolute -right-4 -top-4 h-full w-full rounded-2xl bg-amber-400/20" />
+                        {newsleeterIssues.length > 0 && <NewsletterCard issue={newsleeterIssues[0]} />}
 
-                        {/* Cover */}
-                        <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-blue-950 shadow-2xl">
-                            {/* Replace with actual issue cover later */}
-                            <div className="flex h-full flex-col justify-between p-7 sm:p-9">
-                                <div>
-                                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-amber-400">
-                                        PM SHRI GSSS DHANAU
-                                    </p>
-
-                                    <div className="mt-3 h-px w-12 bg-amber-400" />
-                                </div>
-
-                                <div>
-                                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-200">
-                                        August
-                                    </p>
-
-                                    <h2 className="mt-1 text-5xl font-black tracking-tight text-white sm:text-6xl">
-                                        2026
-                                    </h2>
-
-                                    <p className="mt-5 max-w-xs text-lg font-semibold leading-7 text-white">
-                                        Our School.
-                                        <br />
-                                        Our Stories.
-                                        <br />
-                                        Our Voice.
-                                    </p>
-                                </div>
-
-                                <div className="flex items-end justify-between">
-                                    <span className="text-xs font-medium text-blue-200">
-                                        ISSUE 01
-                                    </span>
-
-                                    <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
-                                        Newsletter
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
