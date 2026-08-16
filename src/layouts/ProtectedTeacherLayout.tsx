@@ -3,10 +3,12 @@ import { Navigate, Outlet } from "react-router";
 import { useAppSelector } from "../app/hooks";
 
 export function ProtectedTeacherLayout() {
-    const {
-        isAuthenticated,
-        initialized,
-    } = useAppSelector((state) => state.auth);
+    // const {
+    //     isAuthenticated,
+    //     initialized,
+    // } = useAppSelector((state) => state.auth);
+    const initialized = true;
+    const isAuthenticated = false;
 
     if (!initialized) {
         return (
@@ -18,7 +20,7 @@ export function ProtectedTeacherLayout() {
         );
     }
 
-    if (isAuthenticated) {
+    if (!isAuthenticated) {
         return (
             <Navigate
                 to="/login"

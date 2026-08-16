@@ -2,7 +2,7 @@ import type { RouteObject } from "react-router";
 
 import { PublicLayout } from "../layouts/PublicLayout";
 import { ProtectedTeacherLayout } from "../layouts/ProtectedTeacherLayout";
-import { TeacherLayout } from "../layouts/TeacherLayout";
+
 
 import { Home } from "../pages/public/Home";
 
@@ -26,7 +26,7 @@ import AchievementDetails from "../pages/public/Achievement/AchievementDetails";
 import About from "../pages/public/About";
 import ArticleDetails from "../pages/public/Article/ArticleDetails";
 
-import { IssueDetails } from "../pages/IssueDetails";
+
 import { Issues } from "../pages/public/Issues/Issues";
 import { Issue } from "../pages/public/Issues/Issue";
 
@@ -99,29 +99,29 @@ export const routes: RouteObject[] = [
         path: "teacher",
         Component: ProtectedTeacherLayout,
 
-        children: [
-            {
-                Component: TeacherLayout,
+        // children: [
+        //     {
+        //         Component: TeacherLayout,
 
-                children: [
-                    {
-                        index: true,
-                        Component: TeacherDashboard,
-                    },
-                    {
-                        path: "newsletters",
-                        Component: Newsletters,
-                    },
-                    {
-                        path: "newsletters/new",
-                        Component: CreateNewsletter,
-                    },
-                    {
-                        path: "newsletters/:newsletterId/edit",
-                        Component: EditNewsletter,
-                    },
-                ],
-            },
-        ],
+        //         children: [
+        //             {
+        //                 index: true,
+        //                 Component: TeacherDashboard,
+        //             },
+        //             {
+        //                 path: "newsletters",
+        //                 Component: Newsletters,
+        //             },
+        //             {
+        //                 path: "newsletters/new",
+        //                 Component: CreateNewsletter,
+        //             },
+        //             {
+        //                 path: "newsletters/:newsletterId/edit",
+        //                 Component: EditNewsletter,
+        //             },
+        //         ],
+        //     },
+        // ],
     },
 ];

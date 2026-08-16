@@ -1,7 +1,5 @@
 import {
     ArrowLeft,
-    CalendarDays,
-    UserRound,
     Newspaper,
 } from "lucide-react";
 
@@ -10,7 +8,7 @@ import {
     useParams,
 } from "react-router";
 
-import { getImageUrl } from "../../../services/storageService";
+
 import { useGetArticleQuery } from "../../../features/article/articleApi";
 import { NewsletterArticlePage } from "../../../components/newsletter/NewsletterCard/NewsletterArticlePage";
 import { NewsletterPage } from "../Issues/NewsletterPage";

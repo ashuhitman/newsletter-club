@@ -19,7 +19,7 @@ import { NewsletterAchievementPage } from "../../../components/newsletter/Newsle
 import { NewsletterEndPage } from "../../../components/newsletter/NewsletterCard/NewsletterEndPage";
 import { getMonthName } from "../../../utils/utils";
 import { NewsletterPage } from "./NewsletterPage";
-import { NewsletterGalleryPage } from "../../../components/newsletter/NewsletterCard/NewsletterGallary";
+
 
 
 
